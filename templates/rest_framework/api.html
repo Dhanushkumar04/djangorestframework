@@ -1,0 +1,44 @@
+{% extends "rest_framework/api.html" %}
+
+{% block style %}
+{{ block.super }}
+<style>
+    body {
+        background-color: #0f172a !important;
+        color: #f8fafc !important;
+        background-image: 
+            radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+            radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+            radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%) !important;
+        background-attachment: fixed !important;
+    }
+    .navbar {
+        background-color: rgba(30, 41, 59, 0.8) !important;
+        backdrop-filter: blur(12px) !important;
+        border: none !important;
+    }
+    .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
+        color: #f8fafc !important;
+    }
+    .content-main {
+        background: rgba(30, 41, 59, 0.6) !important;
+        border-radius: 12px;
+        backdrop-filter: blur(12px);
+        padding: 20px;
+        box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+    }
+    h1, h2, h3, h4, h5, h6, .form-control, .btn {
+        color: #f8fafc !important;
+    }
+    .well {
+        background: rgba(15, 23, 42, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    select, input, textarea {
+        background-color: rgba(255,255,255,0.1) !important;
+    }
+    .string { color: #6EE7B7 !important; }
+    .number { color: #3B82F6 !important; }
+    .boolean { color: #9333EA !important; }
+</style>
+{% endblock %}

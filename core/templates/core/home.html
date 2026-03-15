@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management API</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-attachment: fixed;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #6EE7B7, #3B82F6, #9333EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .card-group {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -15px rgba(0,0,0,0.7);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-title.admin { color: #f43f5e; }
+        .card-title.docs { color: #3b82f6; }
+        .card-title.mapping { color: #eab308; }
+        .card-title.master { color: #10b981; }
+
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 0.75rem;
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.3s ease;
+            z-index: 0;
+        }
+
+        .link-item:hover::before {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .link-item:hover {
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .link-text {
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        
+        .link-arrow {
+            position: relative;
+            z-index: 1;
+            opacity: 0.5;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .link-item:hover .link-arrow {
+            transform: translateX(3px);
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Learning Management System</h1>
+            <p class="subtitle">API Directory & Management Dashboard</p>
+        </header>
+
+        <div class="grid">
+            <!-- Admin & Docs -->
+            <div class="card-group">
+                <div class="card-title admin">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    Administration
+                </div>
+                <div class="link-list">
+                    <a href="/admin/" class="link-item">
+                        <span class="link-text">Django Admin Dashboard</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+                
+                <div class="card-title docs" style="margin-top: 2rem;">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    API Documentation
+                </div>
+                <div class="link-list">
+                    <a href="/swagger/" class="link-item">
+                        <span class="link-text">Swagger UI (Interactive)</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/redoc/" class="link-item">
+                        <span class="link-text">ReDoc (Reference)</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Master Entities -->
+            <div class="card-group">
+                <div class="card-title master">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Master Entities
+                </div>
+                <div class="link-list">
+                    <a href="/api/vendors/" class="link-item">
+                        <span class="link-text">Vendors API</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/api/products/" class="link-item">
+                        <span class="link-text">Products API</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/api/courses/" class="link-item">
+                        <span class="link-text">Courses API</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/api/certifications/" class="link-item">
+                        <span class="link-text">Certifications API</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mapping Entities -->
+            <div class="card-group">
+                <div class="card-title mapping">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg>
+                    Mapping Entities
+                </div>
+                <div class="link-list">
+                    <a href="/api/vendor-product-mappings/" class="link-item">
+                        <span class="link-text">Vendor ↔ Product Mappings</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/api/product-course-mappings/" class="link-item">
+                        <span class="link-text">Product ↔ Course Mappings</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                    <a href="/api/course-certification-mappings/" class="link-item">
+                        <span class="link-text">Course ↔ Certification Mappings</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
