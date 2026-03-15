@@ -1,8 +1,6 @@
 # django learning management api
 
-my personal project to build a learning management backend using django rest framework.
-
-i built this completely from scratch to get better at DRF. i specifically challenged myself to avoid using generic viewsets or shortcuts, so every single endpoint is written manually using strictly `APIView`. 
+i built this completely from scratch to get better at DRF. This is the assignment given by AI Certs company the main requirement is to avoid using generic viewsets or shortcuts, so every single endpoint is written manually using strictly `APIView`. 
 
 ## what it does
 it basically manages 4 main things:
